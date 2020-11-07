@@ -36,7 +36,7 @@ const Modal =({show,handleClose,handleStop,smallnav})=>{
                                            
                                 <h4><input type="radio" name="opn" value="other" checked={currentOther.other === 'other'} onChange={(e) => changeOther({ other: e.target.value })}/>Other reason</h4>
                                 <div className={showTextArea}>
-                                    <textarea rows={smallnav==='true'?"4":"5"} cols={smallnav==='true'?"40":"50"}></textarea>
+                                    <textarea rows={smallnav==='true'?"4":"5"} cols={smallnav==='true'?"30":"50"}></textarea>
                                 </div>
                                 
                             </div>
