@@ -56,7 +56,7 @@
       margin-left: 40px;
   }
 
-  @media (max-width:468px){
+  @media (max-width:768px){
     .modal-main{
       width: 80%;
     }
