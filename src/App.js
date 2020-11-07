@@ -5,6 +5,7 @@ import Modal from './Components/Modal'
 class App extends Component{
   state = { 
     minutes: 10,
+    change:true,
     seconds: 0,
     show: false,
     stop:''
@@ -55,9 +56,11 @@ componentWillUnmount() {
 }
 
   render(){
+    const toggler= this.state.change?"container":"change";
+    const showMenu=this.state.change?"hideMenu":"showMenu";
     return (
       <div className="App">
-        <nav>
+        <nav className="navbar">
           <div className="navbar_left">
             <div className="logo">
               <img width={120} src="https://cdn3.f-cdn.com/contestentries/1476233/31058983/5c769526b8dff_thumb900.jpg" alt="Logo"/>
@@ -66,15 +69,45 @@ componentWillUnmount() {
           </div> 
           <Modal show={this.state.show} handleClose={this.hideModal} handleStop={this.handleStop}/>
           <div className="navbar_right">
-          <div>
+            <div>
                 { this.state.minutes === 0 && this.state.seconds === 0
                     ? <h1>Busted!</h1>
                     : <h1>Time Remaining: {this.state.minutes}:{this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds}</h1>
                 }
             </div>
-          <button className="end_class_btn" type="button" onClick={this.showModal}>End Class</button>
+           <button className="end_class_btn" type="button" onClick={this.showModal}>End Class</button>
           </div>
         </nav>
+        <div  className="small-navbar">
+          <nav>
+            <div className="mobile_view">
+                <div className="navbar_left">
+                  <div className="logo">
+                    <img width={100} src="https://cdn3.f-cdn.com/contestentries/1476233/31058983/5c769526b8dff_thumb900.jpg" alt="Logo"/>
+                  </div>
+                  <h1>Codingal</h1>
+                </div>
+                <div className="navbar_right"> 
+                    <div className={toggler} onClick={()=>this.setState({change:!this.state.change})}>
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </div>
+            </div>
+          </nav>
+          <Modal show={this.state.show} handleClose={this.hideModal} handleStop={this.handleStop} smallnav='true'/>
+          <div className={showMenu}>
+                  <div className="timer">
+                      { this.state.minutes === 0 && this.state.seconds === 0
+                          ? <h3>Busted!</h3>
+                          : <h3>Time Remaining: {this.state.minutes}:{this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds}</h3>
+                      }
+                  </div>
+                <button className="end_class_btn" type="button" onClick={this.showModal}>End Class</button>
+            </div>
+        </div>
+       
       </div>
     );
   }

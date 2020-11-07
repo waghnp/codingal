@@ -55,3 +55,12 @@
   .options{
       margin-left: 40px;
   }
+
+  @media (max-width:468px){
+    .modal-main{
+      width: 80%;
+    }
+    .options{
+      margin-left:15px;
+  }
+  }

@@ -1,12 +1,15 @@
 import React,{useState} from 'react'
 import './Modal.css'
 
-const Modal =({show,handleClose,handleStop})=>{
+const Modal =({show,handleClose,handleStop,smallnav})=>{
     const [currentState,changeState]=useState({
         selected:''
     })
     const [currentOther,changeOther]=useState({other:''})
 
+  const handleSubmit=(event)=> {
+        event.preventDefault();
+      }
         const showHideClassName = show ? "modal display-block" : "modal display-none";
         const showHideOptions= currentState.selected ? "display-block":"display-none";
         const showTextArea=currentOther.other ? "display-block":"display-none";
@@ -14,12 +17,12 @@ const Modal =({show,handleClose,handleStop})=>{
         return (
             <div className={showHideClassName}>
               
-                  <div className="modal-main">
+                  <form className="modal-main" onSubmit={handleSubmit}>
                       <h1>Select a reason to end class</h1>
                       <div>
-                        <h3><input type="radio" name="interupt" value="complete"/>Class Completed</h3> 
+                        <h3><input type="radio" name="interupt" value="complete" required/>Class Completed</h3> 
       
-                        <h3><input type="radio" name="interupt" value="interupt" checked={currentState.selected === 'interupt'} onChange={(e) => changeState({ selected: e.target.value })}/>Class interrupted/aborted</h3> 
+                        <h3><input type="radio" name="interupt" value="interupt" required checked={currentState.selected === 'interupt'} onChange={(e) => changeState({ selected: e.target.value })}/>Class interrupted/aborted</h3> 
                         <div className={showHideOptions}>
                             <div className="options">
                                            
@@ -33,7 +36,7 @@ const Modal =({show,handleClose,handleStop})=>{
                                            
                                 <h4><input type="radio" name="opn" value="other" checked={currentOther.other === 'other'} onChange={(e) => changeOther({ other: e.target.value })}/>Other reason</h4>
                                 <div className={showTextArea}>
-                                    <textarea rows="5" cols="50"></textarea>
+                                    <textarea rows={smallnav==='true'?"4":"5"} cols={smallnav==='true'?"40":"50"}></textarea>
                                 </div>
                                 
                             </div>
@@ -41,10 +44,10 @@ const Modal =({show,handleClose,handleStop})=>{
                               
                       </div>
                       <div>
-                        <button className="btn end_class" onClick={handleStop}>End Class</button>
-                        <button className="btn cancel" onClick={handleClose}>Cancel</button>
+                        <button className="btn end_class" onClick={handleStop} type="submit" >End Class</button>
+                        <button className="btn cancel" onClick={handleClose} type="button">Cancel</button>
                       </div>
-                  </div>
+                    </form>
             </div>
           );
   };
